@@ -1,4 +1,4 @@
-# Nome do Projeto
+# CRUD Simples
 
 CRUD em C# utilizando arquitetura em camadas (Domain, Application, Infrastructure, UI).
 Projeto desenvolvido como parte do plano de estudos para Arquitetura de Software.
