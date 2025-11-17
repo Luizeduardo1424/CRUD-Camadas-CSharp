@@ -44,7 +44,7 @@
         public static implicit operator string(NomeProduto nome) => nome.Valor;
         public static explicit operator NomeProduto(string valor) => Criar(valor);
 
-        public override string ToString() => Valor.ToString();
+        public override string ToString() => Valor;
     }
 
     public record struct DescricaoProduto
@@ -54,7 +54,10 @@
         private DescricaoProduto(string? valor)
         {
             if (valor is null)
+            {
+                Valor = null;
                 return;
+            }
 
             if (string.IsNullOrWhiteSpace(valor))
                 throw new ArgumentNullException(nameof(valor), "A descrição não pode conter apenas espaços em branco.");
@@ -70,6 +73,8 @@
         // Operadores de conversão
         public static implicit operator string?(DescricaoProduto descricao) => descricao.Valor;
         public static explicit operator DescricaoProduto?(string valor) => Criar(valor);
+
+        public override string? ToString() => Valor;
     }
 
     public record struct PrecoProduto
@@ -84,6 +89,33 @@
             Valor = valor;
         }
 
-        public 
+        public static PrecoProduto Criar(decimal valor) => new(valor);
+
+        // Operadores de conversão
+        public static implicit operator decimal(PrecoProduto preco) => preco.Valor;
+        public static implicit operator PrecoProduto(decimal valor) => Criar(valor);
+
+        public override string ToString() => Valor.ToString("C");
+    }
+
+    public record struct EstoqueProduto
+    {
+        public int Valor { get; }
+
+        private EstoqueProduto(int valor)
+        {
+            if (valor < 0)
+                throw new ArgumentOutOfRangeException(nameof(valor), "O estoque não pode ser negativo.");
+
+            Valor = valor;
+        }
+
+        public static EstoqueProduto Criar(int valor) => new(valor);
+
+        // Operadores de conversão
+        public static implicit operator int(EstoqueProduto estoque) => estoque.Valor;
+        public static implicit operator EstoqueProduto(int valor) => Criar(valor);
+
+        public override string ToString() => Valor.ToString();
     }
 }
