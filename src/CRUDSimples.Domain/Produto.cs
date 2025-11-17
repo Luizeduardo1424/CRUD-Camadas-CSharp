@@ -28,6 +28,9 @@ public class Produto
     // Factory method para produto existente
     public static Produto Carregar(ProdutoId id, NomeProduto nome, DescricaoProduto descricao, PrecoProduto preco, EstoqueProduto estoque)
     {
+        if (!id.EhPersistido)
+            throw new ArgumentOutOfRangeException(nameof(id), "ID deve ser persistido para carregar entidade existente");
+
         var produto = new Produto
         {
             Id = id,

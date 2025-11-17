@@ -17,6 +17,11 @@
         // Factory method para ID persistido
         public static ProdutoId FromDatabase(int valor) => Criar(valor);
 
+        // Propriedades de estado
+        public bool EhNovo => Valor == 0;
+        public bool EhPersistido => Valor > 0;
+        public bool EhValido => Valor >= 0;
+
         // Operadores de conversão
         public static implicit operator int(ProdutoId id) => id.Valor;
         public static explicit operator ProdutoId(int valor) => Criar(valor);
